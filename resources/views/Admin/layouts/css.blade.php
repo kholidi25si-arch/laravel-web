@@ -1,0 +1,11 @@
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ asset('AdminAssets/images/favicon.ico') }}">
+
+  <!-- Local Third-Party Libraries (100% Offline Compatible) -->
+  <link rel="stylesheet" href="{{ asset('AdminAssets/libs/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('AdminAssets/libs/bootstrap-icons/bootstrap-icons.css') }}">
+  <link rel="stylesheet" href="{{ asset('AdminAssets/libs/apexcharts/apexcharts.css') }}">
+  <link rel="stylesheet" href="{{ asset('AdminAssets/libs/flatpickr/flatpickr.min.css') }}">
+
+  <!-- Main Design System & Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ asset('AdminAssets/css/main.css') }}">

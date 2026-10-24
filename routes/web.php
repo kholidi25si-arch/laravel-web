@@ -8,6 +8,7 @@ use App\Http\Controllers\Guest\GuestController;
 use App\Http\Controllers\Admin\PasienHewanController;
 use App\Http\Controllers\Admin\LayananKlinikController;
 use App\Http\Controllers\Admin\DokterController;
+use App\Http\Controllers\Admin\UserController;
 
 
 
@@ -22,6 +23,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('pasien-hewan', PasienHewanController::class);
     Route::resource('layanan-klinik', LayananKlinikController::class);
     Route::resource('dokter', DokterController::class);
+    Route::resource('user', UserController::class);
 });
 
 //Guest
