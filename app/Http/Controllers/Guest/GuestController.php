@@ -8,7 +8,12 @@ class GuestController extends Controller
 {
     public function index()
     {
-        return view('guest.DashboardGuest');
+        return view('Guest.home');
+    }
+
+    public function home()
+    {
+        return view('Guest.home');
     }
 }
 
