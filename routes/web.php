@@ -9,6 +9,8 @@ use App\Http\Controllers\Guest\AuthController;
 use App\Http\Controllers\Admin\PasienHewanController;
 use App\Http\Controllers\Admin\LayananKlinikController;
 use App\Http\Controllers\Admin\DokterController;
+use App\Http\Controllers\Admin\JadwalPraktikController;
+use App\Http\Controllers\Admin\TestimoniController;
 use App\Http\Controllers\Admin\UserController;
 
 
@@ -33,6 +35,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('pasien-hewan', PasienHewanController::class);
         Route::resource('layanan-klinik', LayananKlinikController::class);
         Route::resource('dokter', DokterController::class);
+        Route::resource('jadwal-praktik', JadwalPraktikController::class);
+        Route::resource('testimoni', TestimoniController::class);
         Route::resource('user', UserController::class);
     });
 });

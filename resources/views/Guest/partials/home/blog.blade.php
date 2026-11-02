@@ -8,7 +8,7 @@
             <div class="row g-5">
                 <div class="col-xl-4 col-lg-6">
                     <div class="bg-light rounded overflow-hidden">
-                        <img class="img-fluid w-100" src=\"{{ asset('GuestAssets/img/blog-1.jpg') }}\" alt="">
+                        <img class="img-fluid w-100" src="{{ asset('GuestAssets/img/blog-1.jpg') }}" alt="">
                         <div class="p-4">
                             <a class="h3 d-block mb-3" href="#!">Dolor clita vero elitr sea stet dolor justo diam</a>
                             <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna
@@ -16,7 +16,7 @@
                         </div>
                         <div class="d-flex justify-content-between border-top p-4">
                             <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-2" src=\"{{ asset('GuestAssets/img/user.jpg') }}\" width="25" height="25" alt="">
+                                <img class="rounded-circle me-2" src="{{ asset('GuestAssets/img/user.jpg') }}" width="25" height="25" alt="">
                                 <small>John Doe</small>
                             </div>
                             <div class="d-flex align-items-center">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-xl-4 col-lg-6">
                     <div class="bg-light rounded overflow-hidden">
-                        <img class="img-fluid w-100" src=\"{{ asset('GuestAssets/img/blog-2.jpg') }}\" alt="">
+                        <img class="img-fluid w-100" src="{{ asset('GuestAssets/img/blog-2.jpg') }}" alt="">
                         <div class="p-4">
                             <a class="h3 d-block mb-3" href="#!">Dolor clita vero elitr sea stet dolor justo diam</a>
                             <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna
@@ -36,7 +36,7 @@
                         </div>
                         <div class="d-flex justify-content-between border-top p-4">
                             <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-2" src=\"{{ asset('GuestAssets/img/user.jpg') }}\" width="25" height="25" alt="">
+                                <img class="rounded-circle me-2" src="{{ asset('GuestAssets/img/user.jpg') }}" width="25" height="25" alt="">
                                 <small>John Doe</small>
                             </div>
                             <div class="d-flex align-items-center">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-xl-4 col-lg-6">
                     <div class="bg-light rounded overflow-hidden">
-                        <img class="img-fluid w-100" src=\"{{ asset('GuestAssets/img/blog-3.jpg') }}\" alt="">
+                        <img class="img-fluid w-100" src="{{ asset('GuestAssets/img/blog-3.jpg') }}" alt="">
                         <div class="p-4">
                             <a class="h3 d-block mb-3" href="#!">Dolor clita vero elitr sea stet dolor justo diam</a>
                             <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna
@@ -56,7 +56,7 @@
                         </div>
                         <div class="d-flex justify-content-between border-top p-4">
                             <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-2" src=\"{{ asset('GuestAssets/img/user.jpg') }}\" width="25" height="25" alt="">
+                                <img class="rounded-circle me-2" src="{{ asset('GuestAssets/img/user.jpg') }}" width="25" height="25" alt="">
                                 <small>John Doe</small>
                             </div>
                             <div class="d-flex align-items-center">

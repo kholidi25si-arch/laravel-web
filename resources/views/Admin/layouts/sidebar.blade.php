@@ -47,6 +47,18 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
+            <a href="{{ route('jadwal-praktik.index') }}" class="sidebar-menu-link {{ request()->routeIs('jadwal-praktik.*') ? 'active' : '' }}" id="menu-jadwal" title="Jadwal Praktik Dokter">
+              <i class="bi bi-calendar-week"></i>
+              <span>Jadwal Praktik Dokter</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="{{ route('testimoni.index') }}" class="sidebar-menu-link {{ request()->routeIs('testimoni.*') ? 'active' : '' }}" id="menu-testimoni" title="Data Testimoni">
+              <i class="bi bi-chat-quote"></i>
+              <span>Data Testimoni</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
             <a href="{{ route('user.index') }}" class="sidebar-menu-link {{ request()->routeIs('user.*') ? 'active' : '' }}" id="menu-user" title="Data User">
               <i class="bi bi-people"></i>
               <span>Data User</span>
