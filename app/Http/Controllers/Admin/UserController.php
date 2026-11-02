@@ -106,8 +106,8 @@ class UserController extends Controller
             $data['password'] = Hash::make($request->password);
         }
 
-        $user->update($data);
 
+        $user->update($data);
         return redirect()->route('user.index')->with('success', 'Perubahan Data Berhasil!');
     }
 

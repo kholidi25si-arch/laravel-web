@@ -66,7 +66,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="page-login.html" class="sidebar-menu-link" id="menu-loginpage" title="Login Page">
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="sidebar-menu-link" id="menu-loginpage" title="Logout">
               <i class="bi bi-box-arrow-in-right"></i>
               <span>Logout</span>
             </a>
@@ -86,8 +86,8 @@
       <img src="{{ asset('AdminAssets/images/Logo.png') }}" alt="Administrator" class="sidebar-profile-img"
         onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop'">
       <div class="sidebar-profile-info">
-        <div class="sidebar-profile-name">Admin</div>
-        <div class="sidebar-profile-email">admin@email.com</div>
+        <div class="sidebar-profile-name">{{ auth()->user()->name ?? 'Admin' }}</div>
+        <div class="sidebar-profile-email">{{ auth()->user()->email ?? '' }}</div>
       </div>
     </div>
   </div>
