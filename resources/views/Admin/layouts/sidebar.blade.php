@@ -66,10 +66,13 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="page-login.html" class="sidebar-menu-link" id="menu-loginpage" title="Login Page">
-              <i class="bi bi-box-arrow-in-right"></i>
-              <span>Logout</span>
-            </a>
+            <form action="{{ route('auth.logout') }}" method="POST" class="m-0">
+              @csrf
+              <button type="submit" class="sidebar-menu-link w-100 border-0 bg-transparent text-start" id="menu-loginpage" title="Logout">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>Logout</span>
+              </button>
+            </form>
           </li>
           <li class="sidebar-menu-item">
             <a href="page-404.html" class="sidebar-menu-link" id="menu-404" title="404 Page">

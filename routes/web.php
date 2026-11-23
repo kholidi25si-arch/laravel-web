@@ -22,14 +22,18 @@ Route::post('/auth', [AuthController::class, 'authenticate'])->name('auth.authen
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'storeRegister'])->name('register.store');
 
-//Admin
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-Route::prefix('admin')->group(function () {
-    Route::resource('pasien-hewan', PasienHewanController::class);
-    Route::resource('layanan-klinik', LayananKlinikController::class);
-    Route::resource('dokter', DokterController::class);
-    Route::resource('user', UserController::class);
+//Admin (wajib login)
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    Route::prefix('admin')->group(function () {
+        Route::resource('pasien-hewan', PasienHewanController::class);
+        Route::resource('layanan-klinik', LayananKlinikController::class);
+        Route::resource('dokter', DokterController::class);
+        Route::resource('user', UserController::class);
+    });
 });
 
 //GuestS

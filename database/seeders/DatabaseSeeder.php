@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@email.com'],
+            ['name' => 'Admin', 'username' => 'admin', 'password' => 'password123'] // otomatis di-hash oleh cast 'hashed'
+        );
     }
 }

@@ -19,6 +19,7 @@ class UserController extends Controller
             'confirmed' => 'Konfirmasi :attribute tidak cocok.',
             'max'       => ':attribute maksimal :max karakter.',
             'min'       => ':attribute minimal :min karakter.',
+            'alpha_dash' => ':attribute hanya boleh huruf, angka, strip, dan underscore.',
         ];
     }
 
@@ -26,6 +27,7 @@ class UserController extends Controller
     {
         return [
             'name'     => 'Nama',
+            'username' => 'Username',
             'email'    => 'Email',
             'password' => 'Password',
         ];
@@ -55,11 +57,13 @@ class UserController extends Controller
     {
         $request->validate([
             'name'     => 'required|string|max:100',
+            'username' => 'required|alpha_dash|max:50|unique:users,username',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
         ], $this->messages(), $this->attributes());
 
         $data['name'] = $request->name;
+        $data['username'] = $request->username;
         $data['email'] = $request->email;
         $data['password'] = Hash::make($request->password);
 
@@ -95,11 +99,13 @@ class UserController extends Controller
         // password opsional saat edit: hanya divalidasi & diubah jika diisi
         $request->validate([
             'name'     => 'required|string|max:100',
+            'username' => 'required|alpha_dash|max:50|unique:users,username,' . $user->id,
             'email'    => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:8|confirmed',
         ], $this->messages(), $this->attributes());
 
         $data['name'] = $request->name;
+        $data['username'] = $request->username;
         $data['email'] = $request->email;
 
         if ($request->filled('password')) {

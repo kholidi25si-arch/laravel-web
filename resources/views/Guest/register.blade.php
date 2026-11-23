@@ -25,6 +25,15 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" id="username" name="username"
+                                    class="form-control border-0 @error('username') is-invalid @enderror"
+                                    style="height: 55px;" placeholder="Username" value="{{ old('username') }}">
+                                @error('username')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" id="email" name="email"
                                     class="form-control border-0 @error('email') is-invalid @enderror"

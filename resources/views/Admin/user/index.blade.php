@@ -37,6 +37,7 @@
                   <tr>
                     <th class="border-0">No</th>
                     <th class="border-0">Nama</th>
+                    <th class="border-0">Username</th>
                     <th class="border-0">Email</th>
                     <th class="border-0">Action</th>
                   </tr>
@@ -46,6 +47,7 @@
                     <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $item->name }}</td>
+                      <td>{{ $item->username }}</td>
                       <td>{{ $item->email }}</td>
                       <td class="text-nowrap">
                         <a href="{{ route('user.edit', $item->id) }}" class="btn btn-info btn-sm">
