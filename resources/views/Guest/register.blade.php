@@ -58,7 +58,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary w-100 py-3">Register</button>
                             <p class="text-center mt-4 mb-0">Sudah punya akun?
-                                <a href="{{ route('auth.login') }}">Login</a></p>
+                                <a href="{{ route('login') }}">Login</a></p>
                         </form>
                     </div>
                 </div>
