@@ -47,6 +47,18 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
+            <a href="{{ route('jadwal-praktik.index') }}" class="sidebar-menu-link {{ request()->routeIs('jadwal-praktik.*') ? 'active' : '' }}" id="menu-jadwal" title="Jadwal Praktik">
+              <i class="bi bi-calendar-week"></i>
+              <span>Jadwal Praktik</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="{{ route('testimoni.index') }}" class="sidebar-menu-link {{ request()->routeIs('testimoni.*') ? 'active' : '' }}" id="menu-testimoni" title="Testimoni">
+              <i class="bi bi-chat-quote"></i>
+              <span>Testimoni</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
             <a href="{{ route('user.index') }}" class="sidebar-menu-link {{ request()->routeIs('user.*') ? 'active' : '' }}" id="menu-user" title="Data User">
               <i class="bi bi-people"></i>
               <span>Data User</span>
@@ -66,7 +78,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <form action="{{ route('auth.logout') }}" method="POST" class="m-0">
+            <form action="{{ route('logout') }}" method="POST" class="m-0">
               @csrf
               <button type="submit" class="sidebar-menu-link w-100 border-0 bg-transparent text-start" id="menu-loginpage" title="Logout">
                 <i class="bi bi-box-arrow-in-right"></i>

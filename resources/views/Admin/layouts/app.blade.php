@@ -26,6 +26,8 @@
     @include('Admin.layouts.header')
 
 
+    @include('Admin.layouts.alert')
+
     @yield('content')
 
     @include('Admin.layouts.footer')

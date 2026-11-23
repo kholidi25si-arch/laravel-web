@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     // Tampilkan halaman login (GET /auth)
-    public function login()
+    public function showLogin()
     {
         return view('Guest.login');
     }
 
-    // Proses form login (POST /auth) - cek email & password ke tabel users
-    public function authenticate(Request $request)
+    // Proses login (POST /auth) - cek username & password ke tabel users
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             'username' => 'required',
@@ -34,29 +34,19 @@ class AuthController extends Controller
                 ->with('success', 'Login berhasil. Selamat datang, ' . Auth::user()->name . '!');
         }
 
-        return redirect()->route('auth.login')
+        return redirect()->route('login')
             ->withInput($request->only('username'))
             ->with('error', 'Username atau password salah!');
     }
 
-    // Logout (POST /logout)
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect()->route('auth.login')->with('success', 'Anda telah logout.');
-    }
-
     // Tampilkan halaman register (GET /register)
-    public function register()
+    public function showRegister()
     {
         return view('Guest.register');
     }
 
-    // Proses form register (POST /register) - validasi lalu simpan ke tabel users
-    public function storeRegister(Request $request)
+    // Proses register (POST /register) - validasi lalu simpan ke tabel users
+    public function register(Request $request)
     {
         $request->validate([
             'name'     => 'required|string|max:255',
@@ -64,11 +54,11 @@ class AuthController extends Controller
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
         ], [
-            'unique'    => ':attribute sudah terdaftar.',
-            'required'  => ':attribute wajib diisi.',
-            'email'     => ':attribute harus berupa email yang valid.',
-            'min'       => ':attribute minimal :min karakter.',
-            'confirmed' => 'Konfirmasi :attribute tidak cocok.',
+            'unique'     => ':attribute sudah terdaftar.',
+            'required'   => ':attribute wajib diisi.',
+            'email'      => ':attribute harus berupa email yang valid.',
+            'min'        => ':attribute minimal :min karakter.',
+            'confirmed'  => 'Konfirmasi :attribute tidak cocok.',
             'alpha_dash' => ':attribute hanya boleh huruf, angka, strip, dan underscore.',
         ], [
             'name'     => 'Name',
@@ -84,7 +74,18 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('auth.login')
+        return redirect()->route('login')
             ->with('success', 'Registrasi berhasil. Silakan login.');
     }
+
+    // Logout (POST /logout)
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login')->with('success', 'Anda telah logout.');
+    }
 }
+
