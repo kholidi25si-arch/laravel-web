@@ -90,6 +90,7 @@ class AuthController extends Controller
         $data['name'] = $request->name;
         $data['email'] = $request->email;
         $data['password'] = Hash::make($request->password);
+        $data['role'] = 'mitra'; // user yang mendaftar sendiri otomatis berperan mitra
 
         User::create($data);
 

@@ -12,14 +12,18 @@ class DatabaseSeeder extends Seeder
 
     /**
      * Seed the application's database.
+     * Password di-hash otomatis oleh cast 'hashed' pada model User.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::updateOrCreate(
+            ['email' => 'superadmin@example.com'],
+            ['name' => 'Super Admin', 'password' => 'password123', 'role' => 'Super Admin']
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'mitra@example.com'],
+            ['name' => 'Mitra KHP', 'password' => 'password123', 'role' => 'mitra']
+        );
     }
 }

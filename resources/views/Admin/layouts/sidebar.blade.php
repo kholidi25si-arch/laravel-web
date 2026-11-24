@@ -58,12 +58,14 @@
               <span>Data Testimoni</span>
             </a>
           </li>
+          @if (auth()->user()->role === 'Super Admin')
           <li class="sidebar-menu-item">
             <a href="{{ route('user.index') }}" class="sidebar-menu-link {{ request()->routeIs('user.*') ? 'active' : '' }}" id="menu-user" title="Data User">
               <i class="bi bi-people"></i>
               <span>Data User</span>
             </a>
           </li>
+          @endif
         </ul>
       </div>
 

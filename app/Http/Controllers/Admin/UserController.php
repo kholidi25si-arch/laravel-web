@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -19,6 +20,7 @@ class UserController extends Controller
             'confirmed' => 'Konfirmasi :attribute tidak cocok.',
             'max'       => ':attribute maksimal :max karakter.',
             'min'       => ':attribute minimal :min karakter.',
+            'in'        => ':attribute yang dipilih tidak valid.',
         ];
     }
 
@@ -28,6 +30,7 @@ class UserController extends Controller
             'name'     => 'Nama',
             'email'    => 'Email',
             'password' => 'Password',
+            'role'     => 'Role',
         ];
     }
 
@@ -57,11 +60,13 @@ class UserController extends Controller
             'name'     => 'required|string|max:100',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
+            'role'     => ['required', Rule::in(User::ROLES)],
         ], $this->messages(), $this->attributes());
 
         $data['name'] = $request->name;
         $data['email'] = $request->email;
         $data['password'] = Hash::make($request->password);
+        $data['role'] = $request->role;
 
         User::create($data);
 
@@ -97,10 +102,12 @@ class UserController extends Controller
             'name'     => 'required|string|max:100',
             'email'    => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:8|confirmed',
+            'role'     => ['required', Rule::in(User::ROLES)],
         ], $this->messages(), $this->attributes());
 
         $data['name'] = $request->name;
         $data['email'] = $request->email;
+        $data['role'] = $request->role;
 
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);

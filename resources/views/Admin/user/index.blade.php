@@ -38,6 +38,7 @@
                     <th class="border-0">No</th>
                     <th class="border-0">Nama</th>
                     <th class="border-0">Email</th>
+                    <th class="border-0">Role</th>
                     <th class="border-0">Action</th>
                   </tr>
                 </thead>
@@ -47,6 +48,7 @@
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $item->name }}</td>
                       <td>{{ $item->email }}</td>
+                      <td><span class="badge {{ $item->role === 'Super Admin' ? 'bg-danger' : 'bg-primary' }}">{{ $item->role }}</span></td>
                       <td class="text-nowrap">
                         <a href="{{ route('user.edit', $item->id) }}" class="btn btn-info btn-sm">
                           <i class="bi bi-pencil-square me-1"></i> Edit
@@ -63,7 +65,7 @@
                     </tr>
                   @empty
                     <tr>
-                      <td colspan="4" class="text-center text-muted py-4">Belum ada data.</td>
+                      <td colspan="5" class="text-center text-muted py-4">Belum ada data.</td>
                     </tr>
                   @endforelse
                 </tbody>

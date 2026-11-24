@@ -23,7 +23,9 @@
           <ul class="dropdown-menu dropdown-menu-quick-action" aria-labelledby="quick-actions-dropdown">
             <li class="dropdown-header">Quick Action Shortcuts</li>
             <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-plus"></i> New Invoice</a></li>
+            @if (auth()->user()->role === 'Super Admin')
             <li><a class="dropdown-item" href="{{ route('user.create') }}"><i class="bi bi-person-plus"></i> New User</a></li>
+            @endif
             <li><a class="dropdown-item" href="#"><i class="bi bi-box-seam"></i> New Product</a></li>
             <li>
               <hr class="dropdown-divider">
@@ -106,7 +108,7 @@
             <i class="bi bi-chevron-down navbar-profile-caret"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-profile" aria-labelledby="profile-dropdown">
-            <li class="dropdown-header">Welcome !</li>
+            <li class="dropdown-header">Welcome ! ({{ auth()->user()->role }})</li>
             <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Account</a></li>
             <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
             <li><a class="dropdown-item" href="#"><i class="bi bi-lock"></i> Lock Screen</a></li>

@@ -25,19 +25,31 @@ Route::post('/auth', [AuthController::class, 'login'])->name('login.process');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->middleware('checkislogin')
+    ->name('logout');
 
-//Admin (wajib login)
-Route::middleware('auth')->group(function () {
+//Admin (wajib login -> middleware checkislogin, lalu dibatasi per role -> checkrole)
+Route::middleware(['checkislogin'])->group(function () {
+
+    // Dashboard: semua user yang sudah login
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 
     Route::prefix('admin')->group(function () {
-        Route::resource('pasien-hewan', PasienHewanController::class);
-        Route::resource('layanan-klinik', LayananKlinikController::class);
-        Route::resource('dokter', DokterController::class);
-        Route::resource('jadwal-praktik', JadwalPraktikController::class);
-        Route::resource('testimoni', TestimoniController::class);
-        Route::resource('user', UserController::class);
+
+        // Hanya Super Admin: kelola data user
+        Route::middleware(['checkrole:Super Admin'])->group(function () {
+            Route::resource('user', UserController::class);
+        });
+
+        // Super Admin dan mitra: data klinik
+        Route::middleware(['checkrole:Super Admin,mitra'])->group(function () {
+            Route::resource('pasien-hewan', PasienHewanController::class);
+            Route::resource('layanan-klinik', LayananKlinikController::class);
+            Route::resource('dokter', DokterController::class);
+            Route::resource('jadwal-praktik', JadwalPraktikController::class);
+            Route::resource('testimoni', TestimoniController::class);
+        });
     });
 });
 

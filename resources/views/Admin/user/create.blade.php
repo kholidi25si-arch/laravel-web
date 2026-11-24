@@ -58,6 +58,16 @@
                 @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
               </div>
               <div class="col-md-6 mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select id="role" name="role" class="form-select @error('role') is-invalid @enderror">
+                  <option value="">-- Pilih Role --</option>
+                  @foreach (\App\Models\User::ROLES as $role)
+                    <option value="{{ $role }}" {{ old('role') === $role ? 'selected' : '' }}>{{ $role }}</option>
+                  @endforeach
+                </select>
+                @error('role')<div class="invalid-feedback">{{ $message }}</div>@enderror
+              </div>
+              <div class="col-md-6 mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror">
                 @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
