@@ -53,6 +53,11 @@
                 @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
               </div>
               <div class="col-md-6 mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}">
+                @error('username')<div class="invalid-feedback">{{ $message }}</div>@enderror
+              </div>
+              <div class="col-md-6 mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
                 @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror

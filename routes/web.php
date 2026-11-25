@@ -1,19 +1,16 @@
 <?php
 
-use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminController;
-
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\Guest\GuestController;
 use App\Http\Controllers\Guest\AuthController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PasienHewanController;
 use App\Http\Controllers\Admin\LayananKlinikController;
 use App\Http\Controllers\Admin\DokterController;
 use App\Http\Controllers\Admin\JadwalPraktikController;
 use App\Http\Controllers\Admin\TestimoniController;
 use App\Http\Controllers\Admin\UserController;
-
-
 
 //Guest (Home, Login, Register)
 Route::get('/', [GuestController::class, 'index'])->name('home');
@@ -54,7 +51,7 @@ Route::middleware(['checkislogin'])->group(function () {
 });
 
 Route::post('question/store', [QuestionController::class, 'store'])
-		->name('question.store');
+    ->name('question.store');
 
 Route::get('/home', function () {
     return view('home');

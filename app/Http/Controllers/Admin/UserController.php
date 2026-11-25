@@ -13,14 +13,15 @@ class UserController extends Controller
     private function messages(): array
     {
         return [
-            'required'  => ':attribute wajib diisi.',
-            'string'    => ':attribute harus berupa teks.',
-            'email'     => ':attribute harus berupa alamat email yang valid.',
-            'unique'    => ':attribute sudah terdaftar.',
-            'confirmed' => 'Konfirmasi :attribute tidak cocok.',
-            'max'       => ':attribute maksimal :max karakter.',
-            'min'       => ':attribute minimal :min karakter.',
-            'in'        => ':attribute yang dipilih tidak valid.',
+            'required'   => ':attribute wajib diisi.',
+            'string'     => ':attribute harus berupa teks.',
+            'email'      => ':attribute harus berupa alamat email yang valid.',
+            'unique'     => ':attribute sudah terdaftar.',
+            'confirmed'  => 'Konfirmasi :attribute tidak cocok.',
+            'max'        => ':attribute maksimal :max karakter.',
+            'min'        => ':attribute minimal :min karakter.',
+            'in'         => ':attribute yang dipilih tidak valid.',
+            'alpha_dash' => ':attribute hanya boleh huruf, angka, strip, dan underscore.',
         ];
     }
 
@@ -28,6 +29,7 @@ class UserController extends Controller
     {
         return [
             'name'     => 'Nama',
+            'username' => 'Username',
             'email'    => 'Email',
             'password' => 'Password',
             'role'     => 'Role',
@@ -58,12 +60,14 @@ class UserController extends Controller
     {
         $request->validate([
             'name'     => 'required|string|max:100',
+            'username' => 'required|alpha_dash|max:50|unique:users,username',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
             'role'     => ['required', Rule::in(User::ROLES)],
         ], $this->messages(), $this->attributes());
 
         $data['name'] = $request->name;
+        $data['username'] = $request->username;
         $data['email'] = $request->email;
         $data['password'] = Hash::make($request->password);
         $data['role'] = $request->role;
@@ -100,19 +104,20 @@ class UserController extends Controller
         // password opsional saat edit: hanya divalidasi & diubah jika diisi
         $request->validate([
             'name'     => 'required|string|max:100',
+            'username' => 'required|alpha_dash|max:50|unique:users,username,' . $user->id,
             'email'    => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:8|confirmed',
             'role'     => ['required', Rule::in(User::ROLES)],
         ], $this->messages(), $this->attributes());
 
         $data['name'] = $request->name;
+        $data['username'] = $request->username;
         $data['email'] = $request->email;
         $data['role'] = $request->role;
 
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
         }
-
 
         $user->update($data);
         return redirect()->route('user.index')->with('success', 'Perubahan Data Berhasil!');

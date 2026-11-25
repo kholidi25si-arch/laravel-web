@@ -27,7 +27,7 @@
                     @endif
 
                     <div class="bg-light rounded p-5">
-                        <form action="{{ route('auth.authenticate') }}" method="POST">
+                        <form action="{{ route('login.process') }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>

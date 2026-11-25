@@ -1,5 +1,3 @@
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-
     <!-- START: Top Navbar Component -->
     <header class="navbar-custom">
       <div class="navbar-left">
@@ -104,7 +102,7 @@
           <button class="navbar-profile-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
             aria-expanded="false" id="profile-dropdown">
             <img src="{{ asset('AdminAssets/images/Logo.png') }}" alt="Profile Image" class="navbar-profile-img">
-            <span class="navbar-profile-name d-none d-md-inline">{{ auth()->user()->name ?? 'Administrator' }}</span>
+            <span class="navbar-profile-name d-none d-md-inline">Administrator</span>
             <i class="bi bi-chevron-down navbar-profile-caret"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-profile" aria-labelledby="profile-dropdown">
@@ -115,8 +113,12 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-right"></i>
-                Logout</a></li>
+            <li>
+              <form action="{{ route('logout') }}" method="POST" class="m-0">
+                @csrf
+                <button type="submit" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right"></i> Logout</button>
+              </form>
+            </li>
           </ul>
         </div>
       </div>

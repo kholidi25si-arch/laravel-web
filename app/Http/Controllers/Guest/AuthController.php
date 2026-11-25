@@ -10,106 +10,82 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    private function messages(): array
-    {
-        return [
-            'required'  => ':attribute wajib diisi.',
-            'string'    => ':attribute harus berupa teks.',
-            'email'     => ':attribute harus berupa alamat email yang valid.',
-            'unique'    => ':attribute sudah terdaftar, gunakan yang lain.',
-            'confirmed' => 'Konfirmasi :attribute tidak cocok.',
-            'max'       => ':attribute maksimal :max karakter.',
-            'min'       => ':attribute minimal :min karakter.',
-        ];
-    }
-
-    private function attributes(): array
-    {
-        return [
-            'username' => 'Username',
-            'name'     => 'Nama',
-            'email'    => 'Email',
-            'password' => 'Password',
-        ];
-    }
-
-    /**
-     * Tampilkan halaman login (GET /auth).
-     */
+    // Tampilkan halaman login (GET /auth)
     public function showLogin()
     {
-        return view('Guest.auth.login');
+        return view('Guest.login');
     }
 
-    /**
-     * Proses login (POST /auth): cek email & password ke tabel users.
-     * - berhasil -> redirect ke Dashboard Admin + alert sukses
-     * - gagal    -> kembali ke halaman Login + alert error
-     */
+    // Proses login (POST /auth) - cek username & password ke tabel users
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email'    => 'required|email',
+            'username' => 'required',
             'password' => 'required',
-        ], $this->messages(), $this->attributes());
+        ], [
+            'username.required' => 'Username wajib diisi.',
+            'password.required' => 'Password wajib diisi.',
+        ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('login_success', 'Login berhasil! Selamat datang, ' . Auth::user()->name . '.');
+            return redirect()->route('admin.dashboard')
+                ->with('success', 'Login berhasil. Selamat datang, ' . Auth::user()->name . '!');
         }
 
-        // password tidak ikut dikembalikan ke form (sengaja tidak di-flash)
-        return redirect()
-            ->route('login')
-            ->withInput($request->only('email'))
-            ->with('login_error', 'Login gagal! Email atau password salah.');
+        return redirect()->route('login')
+            ->withInput($request->only('username'))
+            ->with('error', 'Username atau password salah!');
     }
 
-    /**
-     * Tampilkan halaman register (GET /register).
-     */
+    // Tampilkan halaman register (GET /register)
     public function showRegister()
     {
-        return view('Guest.auth.register');
+        return view('Guest.register');
     }
 
-    /**
-     * Simpan registrasi (POST /register).
-     */
+    // Proses register (POST /register) - validasi lalu simpan ke tabel users
     public function register(Request $request)
     {
         $request->validate([
-            'name'     => 'required|string|min:3|max:100',
-            'email'    => 'required|email|max:100|unique:users,email',
+            'name'     => 'required|string|max:255',
+            'username' => 'required|alpha_dash|max:50|unique:users,username',
+            'email'    => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
-        ], $this->messages(), $this->attributes());
+        ], [
+            'unique'     => ':attribute sudah terdaftar.',
+            'required'   => ':attribute wajib diisi.',
+            'email'      => ':attribute harus berupa email yang valid.',
+            'min'        => ':attribute minimal :min karakter.',
+            'confirmed'  => 'Konfirmasi :attribute tidak cocok.',
+            'alpha_dash' => ':attribute hanya boleh huruf, angka, strip, dan underscore.',
+        ], [
+            'name'     => 'Name',
+            'username' => 'Username',
+            'email'    => 'Email',
+            'password' => 'Password',
+        ]);
 
-        $data['name'] = $request->name;
-        $data['email'] = $request->email;
-        $data['password'] = Hash::make($request->password);
-        $data['role'] = 'mitra'; // user yang mendaftar sendiri otomatis berperan mitra
+        User::create([
+            'name'     => $request->name,
+            'username' => $request->username,
+            'email'    => $request->email,
+            'password' => Hash::make($request->password),
+            'role'     => 'mitra', // user yang mendaftar sendiri otomatis berperan mitra
+        ]);
 
-        User::create($data);
-
-        return redirect()
-            ->route('login')
-            ->with('register_success', 'Registrasi berhasil! Silakan login.');
+        return redirect()->route('login')
+            ->with('success', 'Registrasi berhasil. Silakan login.');
     }
 
-    /**
-     * Logout (POST /logout).
-     */
+    // Logout (POST /logout)
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()
-            ->route('login')
-            ->with('logout_success', 'Anda berhasil logout.');
+        return redirect()->route('login')->with('success', 'Anda telah logout.');
     }
 }

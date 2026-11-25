@@ -37,6 +37,7 @@
                   <tr>
                     <th class="border-0">No</th>
                     <th class="border-0">Nama</th>
+                    <th class="border-0">Username</th>
                     <th class="border-0">Email</th>
                     <th class="border-0">Role</th>
                     <th class="border-0">Action</th>
@@ -47,6 +48,7 @@
                     <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $item->name }}</td>
+                      <td>{{ $item->username }}</td>
                       <td>{{ $item->email }}</td>
                       <td><span class="badge {{ $item->role === 'Super Admin' ? 'bg-danger' : 'bg-primary' }}">{{ $item->role }}</span></td>
                       <td class="text-nowrap">

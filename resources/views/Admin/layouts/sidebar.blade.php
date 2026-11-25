@@ -47,15 +47,15 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="{{ route('jadwal-praktik.index') }}" class="sidebar-menu-link {{ request()->routeIs('jadwal-praktik.*') ? 'active' : '' }}" id="menu-jadwal" title="Jadwal Praktik Dokter">
+            <a href="{{ route('jadwal-praktik.index') }}" class="sidebar-menu-link {{ request()->routeIs('jadwal-praktik.*') ? 'active' : '' }}" id="menu-jadwal" title="Jadwal Praktik">
               <i class="bi bi-calendar-week"></i>
-              <span>Jadwal Praktik Dokter</span>
+              <span>Jadwal Praktik</span>
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="{{ route('testimoni.index') }}" class="sidebar-menu-link {{ request()->routeIs('testimoni.*') ? 'active' : '' }}" id="menu-testimoni" title="Data Testimoni">
+            <a href="{{ route('testimoni.index') }}" class="sidebar-menu-link {{ request()->routeIs('testimoni.*') ? 'active' : '' }}" id="menu-testimoni" title="Testimoni">
               <i class="bi bi-chat-quote"></i>
-              <span>Data Testimoni</span>
+              <span>Testimoni</span>
             </a>
           </li>
           @if (auth()->user()->role === 'Super Admin')
@@ -80,10 +80,13 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="sidebar-menu-link" id="menu-loginpage" title="Logout">
-              <i class="bi bi-box-arrow-in-right"></i>
-              <span>Logout</span>
-            </a>
+            <form action="{{ route('logout') }}" method="POST" class="m-0">
+              @csrf
+              <button type="submit" class="sidebar-menu-link w-100 border-0 bg-transparent text-start" id="menu-loginpage" title="Logout">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>Logout</span>
+              </button>
+            </form>
           </li>
           <li class="sidebar-menu-item">
             <a href="page-404.html" class="sidebar-menu-link" id="menu-404" title="404 Page">
@@ -100,8 +103,8 @@
       <img src="{{ asset('AdminAssets/images/Logo.png') }}" alt="Administrator" class="sidebar-profile-img"
         onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop'">
       <div class="sidebar-profile-info">
-        <div class="sidebar-profile-name">{{ auth()->user()->name ?? 'Admin' }}</div>
-        <div class="sidebar-profile-email">{{ auth()->user()->email ?? '' }}</div>
+        <div class="sidebar-profile-name">Admin</div>
+        <div class="sidebar-profile-email">admin@email.com</div>
       </div>
     </div>
   </div>
