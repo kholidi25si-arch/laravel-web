@@ -13,6 +13,11 @@ class AuthController extends Controller
     // Tampilkan halaman login (GET /auth)
     public function showLogin()
     {
+        // Halaman login hanya untuk yang belum login
+        if (Auth::check()) {
+            return redirect()->route('admin.dashboard');
+        }
+
         return view('Guest.login');
     }
 
@@ -29,6 +34,9 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
+            // Data tambahan di session (bukan pengganti status login)
+            session(['last_login' => now()->timezone('Asia/Jakarta')->format('d M Y, H:i') . ' WIB']);
 
             return redirect()->route('admin.dashboard')
                 ->with('success', 'Login berhasil. Selamat datang, ' . Auth::user()->name . '!');

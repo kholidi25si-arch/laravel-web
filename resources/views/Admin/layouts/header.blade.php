@@ -47,6 +47,7 @@
         <button class="navbar-action-btn me-1" aria-label="Toggle Fullscreen" id="btn-fullscreen">
           <i class="bi bi-arrows-fullscreen"></i>
         </button>
+        @auth
         <div class="dropdown">
           <button class="navbar-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
             aria-expanded="false" id="btn-notifications" data-bs-auto-close="outside">
@@ -102,11 +103,12 @@
           <button class="navbar-profile-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
             aria-expanded="false" id="profile-dropdown">
             <img src="{{ asset('AdminAssets/images/Logo.png') }}" alt="Profile Image" class="navbar-profile-img">
-            <span class="navbar-profile-name d-none d-md-inline">Administrator</span>
+            <span class="navbar-profile-name d-none d-md-inline">{{ Auth::user()->name }}</span>
             <i class="bi bi-chevron-down navbar-profile-caret"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-profile" aria-labelledby="profile-dropdown">
             <li class="dropdown-header">Welcome ! ({{ auth()->user()->role }})</li>
+            <li><span class="dropdown-item-text small text-muted"><i class="bi bi-clock-history"></i> Login terakhir: {{ session('last_login') }}</span></li>
             <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Account</a></li>
             <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
             <li><a class="dropdown-item" href="#"><i class="bi bi-lock"></i> Lock Screen</a></li>
@@ -121,6 +123,9 @@
             </li>
           </ul>
         </div>
+        @else
+        <a href="{{ route('login') }}" class="btn btn-primary btn-sm ms-2">Login</a>
+        @endauth
       </div>
     </header>
     <!-- END: Top Navbar Component -->

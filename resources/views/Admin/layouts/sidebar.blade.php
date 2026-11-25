@@ -100,11 +100,11 @@
 
     <!-- Sidebar Profile Card (Dynamic Footer) -->
     <div class="sidebar-profile">
-      <img src="{{ asset('AdminAssets/images/Logo.png') }}" alt="Administrator" class="sidebar-profile-img"
+      <img src="{{ asset('AdminAssets/images/Logo.png') }}" alt="{{ Auth::user()->name }}" class="sidebar-profile-img"
         onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop'">
       <div class="sidebar-profile-info">
-        <div class="sidebar-profile-name">Admin</div>
-        <div class="sidebar-profile-email">admin@email.com</div>
+        <div class="sidebar-profile-name">{{ Auth::user()->name }}</div>
+        <div class="sidebar-profile-email">{{ Auth::user()->email }}</div>
       </div>
     </div>
   </div>
